@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#0099CC"/>
+      <stop offset="100%" stop-color="#6FD56F"/>
+    </linearGradient>
+  </defs>
+  <rect width="240" height="240" rx="24" fill="url(#g)" />
+  <g transform="translate(40,48)" fill="#fff" font-family="Inter, Arial, sans-serif">
+    <text x="0" y="32" font-size="20" font-weight="700">Transparencia</text>
+    <text x="0" y="60" font-size="20" font-weight="700">Local 360</text>
+    <text x="0" y="96" font-size="12" opacity="0.9">Gobiernos abiertos,</text>
+    <text x="0" y="112" font-size="12" opacity="0.9">comunidades transparentes</text>
+  </g>
+</svg>
