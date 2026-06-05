@@ -2,7 +2,7 @@ import { useState } from "react";
 import { projects, Project } from "../data/projects";
 import { Button } from "./ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
-import { MapIcon, Users } from "lucide-react";
+import { MapIcon, Users, ArrowLeft } from "lucide-react";
 import { InteractiveMap } from "./InteractiveMap";
 import { SocialFeed } from "./SocialFeed";
 
@@ -19,36 +19,84 @@ export function MapView({ onProjectClick, onBack }: MapViewProps) {
   };
 
   return (
-    <section className="py-8 px-8 bg-gradient-to-br from-blue-50 to-green-50 min-h-screen">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <Button onClick={onBack} variant="outline" className="mb-6">
-          ← Volver al inicio
-        </Button>
+    <section className="gov-background-light min-h-screen">
+      <div className="gov-container py-12 px-6">
+        {/* Header Section */}
+        <div className="mb-12">
+          <Button
+            onClick={onBack}
+            className="mb-8 inline-flex items-center gap-2 gov-button-outline"
+          >
+            <ArrowLeft size={18} />
+            Volver al inicio
+          </Button>
+
+          <div className="mb-8">
+            <h2 className="gov-title mb-2">
+              Monitoreo de Proyectos Municipales
+            </h2>
+            <p className="gov-text-muted text-lg">
+              Explora en tiempo real los proyectos de infraestructura y servicios
+              de tu comunidad. Acceso transparente a información municipal.
+            </p>
+          </div>
+        </div>
 
         {/* Tabs Navigation */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
-            <TabsTrigger value="map" className="gap-2">
-              <MapIcon className="h-4 w-4" />
-              Mapa de Proyectos
-            </TabsTrigger>
-            <TabsTrigger value="social" className="gap-2">
-              <Users className="h-4 w-4" />
-              Participación Ciudadana
-            </TabsTrigger>
-          </TabsList>
+          <div className="mb-8 overflow-x-auto">
+            <TabsList
+              className="inline-flex gap-2 p-1 rounded-lg"
+              style={{
+                backgroundColor: "rgba(255,255,255,0.8)",
+                border: "1px solid var(--gov-border-light)",
+              }}
+            >
+              <TabsTrigger
+                value="map"
+                className="gov-button flex items-center gap-2"
+                style={{
+                  color: activeTab === "map" ? "white" : "var(--gov-gray)",
+                  backgroundColor:
+                    activeTab === "map" ? "#0066cc" : "transparent",
+                  fontWeight: activeTab === "map" ? 600 : 500,
+                }}
+              >
+                <MapIcon size={18} />
+                Mapa Interactivo
+              </TabsTrigger>
+              <TabsTrigger
+                value="social"
+                className="gov-button flex items-center gap-2"
+                style={{
+                  color: activeTab === "social" ? "white" : "var(--gov-gray)",
+                  backgroundColor:
+                    activeTab === "social" ? "#00a34d" : "transparent",
+                  fontWeight: activeTab === "social" ? 600 : 500,
+                }}
+              >
+                <Users size={18} />
+                Participación Ciudadana
+              </TabsTrigger>
+            </TabsList>
+          </div>
 
           {/* Map Tab */}
-          <TabsContent value="map" className="mt-0">
-            <div className="mb-6">
-              <h2 className="text-gray-800 mb-2">Mapa Interactivo de Proyectos</h2>
-              <p className="text-gray-600">
-                Explora los proyectos de Curridabat en el mapa. Haz clic en los
-                marcadores para más información.
+          <TabsContent value="map" className="mt-0 space-y-6">
+            <div className="gov-card p-6">
+              <h3 className="gov-subtitle mb-2">Mapa de Proyectos</h3>
+              <p className="gov-text-muted">
+                Haz clic en los marcadores para ver detalles completos de cada
+                proyecto, incluyendo presupuesto, estado de avance y documentos.
               </p>
             </div>
-            <div className="relative h-[calc(100vh-300px)] w-full rounded-2xl overflow-hidden shadow-2xl">
+            <div
+              className="relative w-full rounded-xl overflow-hidden gov-shadow-large"
+              style={{
+                height: "calc(100vh - 350px)",
+                border: "1px solid var(--gov-border-light)",
+              }}
+            >
               <InteractiveMap
                 projects={projects}
                 onProjectClick={handleProjectSelect}
@@ -57,15 +105,19 @@ export function MapView({ onProjectClick, onBack }: MapViewProps) {
           </TabsContent>
 
           {/* Social Feed Tab */}
-          <TabsContent value="social" className="mt-0">
-            <div className="mb-8">
-              <h2 className="text-gray-800 mb-2">Participación Ciudadana</h2>
-              <p className="text-gray-600">
-                Comparte tus opiniones, sugerencias y experiencias sobre los proyectos
-                públicos. Tu voz es importante para mejorar nuestra comunidad.
+          <TabsContent value="social" className="mt-0 space-y-6">
+            <div className="gov-card p-6">
+              <h3 className="gov-subtitle mb-2">Participación Ciudadana</h3>
+              <p className="gov-text-muted">
+                Comparte tus opiniones, sugerencias y experiencias sobre los
+                proyectos públicos. Tu participación es fundamental para
+                mejorar la transparencia y calidad de los servicios
+                municipales.
               </p>
             </div>
-            <SocialFeed />
+            <div className="gov-card p-8">
+              <SocialFeed />
+            </div>
           </TabsContent>
         </Tabs>
       </div>
